@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        {% for p in post %}
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="{{p.image.url}}" alt="Card image cap">
+                <div class="card-header">
+                    {{p.title}}
+                </div>
+                <div class="card-body">
+                   <h5>Email: {{p.email}}</h5>
+                   <h5>Salary: {{p.salary}}</h5>
+                   <h5>Details: {{p.details}}</h5>
+                   <h5>Salary: {{p.salary}}</h5>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock body %}
