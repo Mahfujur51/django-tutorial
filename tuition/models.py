@@ -52,8 +52,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(default=now)
     image = models.ImageField(default='default.jpg', upload_to='tuition/images')
     medium = MultiSelectField(choices=MY_CHOICES, max_choices=3, max_length=100, default='Bangla')
-    subject = models.ManyToManyField(Subject,related_name='subject_set')
-    class_in = models.ManyToManyField(Class_in,related_name='class_set')
+    subject = models.ManyToManyField(Subject, related_name='subject_set')
+    class_in = models.ManyToManyField(Class_in, related_name='class_set')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% block body %}
+<div class="container py-2">
+    <div class="card">
+        <div class="card-header text-center">Subject name: {{subject.name}}</div>
+        <div class="card-body">
+            <ul>
+                {% for s in post %}
+                <li>{{s.title}}</li>
+                -by <small>{{s.user.username}}</small>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock body %}
