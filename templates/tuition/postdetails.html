@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block body %}
+Title:{{object.title}}
+Subject: {% for s in object.subject.all  %}
+{{s.name}}
+{% endfor %}
+
+<br>
+Class: {% for c  in object.class_in.all %}
+{{c.name}}
+{% endfor %}
+
+{% endblock body %}

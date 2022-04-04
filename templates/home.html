@@ -2,9 +2,10 @@
 <div class="container py-2">
   <div class="card">
     <div class="card-header">
-      <h2>Home page</h2>
+      <h2>Home page</h2>-{{msg}}
     </div>
     <div class="card-body">{% lorem 2 %}</div>
+    {% comment %}
     <table class="table">
       <thead>
         <tr>
@@ -21,6 +22,7 @@
         {% endfor %}
       </tbody>
     </table>
+    {% endcomment %}
   </div>
 </div>
 {% endblock body %}

@@ -1,11 +1,10 @@
 import django.utils.timezone
-from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
 from django.utils.timezone import now
 from multiselectfield import MultiSelectField
-
+from PIL import Image
 
 # Create your models here.
 
