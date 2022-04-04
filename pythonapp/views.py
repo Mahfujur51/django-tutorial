@@ -4,6 +4,9 @@
 from unicodedata import name
 
 from django.shortcuts import HttpResponse, render
+from django.views.generic import TemplateView
+
+
 
 # from tuition.models import Contact
 
@@ -16,6 +19,8 @@ def home(reqeuest):
     }
     return render(reqeuest, 'home.html', context)
 
+class HomeView(TemplateView):
+    template_name = "home.html"
 
 # def contact(request):
 #     if request.method == "POST":

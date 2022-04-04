@@ -1,25 +1,43 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views import View
 
 from .forms import ContactForm, PostForm
 from .models import Contact, Post, Subject
 
 
-# Create your views here.
-def contact(request):
-    if request.method == "POST":
-        form = ContactForm(request.POST)
+class ContactView(View):
+    form_class = ContactForm
+    template_name = 'contact.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
         if form.is_valid():
-            form.save()
-            # name = form.cleaned_data['name']
-            # phone = form.cleaned_data['phone']
-            # content = form.cleaned_data['content']
-            # obj = Contact(name=name, phone=phone, content=content)
-            # obj.save()
-        # return HttpResponse("<h1>Thanks for contacting us</h1>")
-    else:
-        form = ContactForm()
-    return render(request, 'contact.html', {'form': form})
+            contact = form.save(commit=False)
+            contact.save()
+            return HttpResponse('Thank you for your message.')
+        return render(request, self.template_name, {'form': form})
+
+
+# Create your views here.
+# def contact(request):
+#     if request.method == "POST":
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             # name = form.cleaned_data['name']
+#             # phone = form.cleaned_data['phone']
+#             # content = form.cleaned_data['content']
+#             # obj = Contact(name=name, phone=phone, content=content)
+#             # obj.save()
+#         # return HttpResponse("<h1>Thanks for contacting us</h1>")
+#     else:
+#         form = ContactForm()
+#     return render(request, 'contact.html', {'form': form})
 
 
 def postview(request):
