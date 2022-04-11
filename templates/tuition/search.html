@@ -3,13 +3,13 @@
   <div class="card">
     <div class="card-header">Search Results</div>
     <div class="card-body">
-        {% for p in results %}
-            {{ p.title }} <br>
-            by: {{ p.user }}
-            <hr>
-            Details:{{ p.details }} 
-            <a href="/tuition/postdetail/{{ p.id }}">...Read More</a> 
-        {% endfor %}
+      {% for p in results %} Title: {{ p.title }} <br />
+      <p>by: {{ p.user }}</p>
+      <hr />
+      <p>Details:{{ p.details }}</p>
+      <a href="/tuition/postdetail/{{ p.id }}">...Read More</a>
+      <hr />
+      {% endfor %}
     </div>
   </div>
 </div>

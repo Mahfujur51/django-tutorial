@@ -3,7 +3,7 @@ from django.urls import path
 
 from .forms import ContactFormtwo
 from .views import (ContactView, PostCreateView, PostDetailView, PostListView,
-                    PostUpdateView, contact, postview, search, subjectview,PostDeleteView)
+                    PostUpdateView, contact,filter, postview, search, subjectview,PostDeleteView)
 
 app_name='tuition'
 
@@ -18,6 +18,7 @@ urlpatterns = [
     path('edit/<int:pk>/', PostUpdateView.as_view(), name="edit"),
     path('delete/<int:pk>/', PostDeleteView.as_view(), name="delete"),
     path('search/', search, name="search"),
+    path('filter/',filter,name="filter"),
 
 
 

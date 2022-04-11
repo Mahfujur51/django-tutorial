@@ -1,25 +1,86 @@
 {% extends 'index.html' %} {% block body %}
 
 <div class="container py-2">
+    <div class="card my-2 py-2">
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+    
+                <form action="/tuition/filter/" method="POST">
+                    {% csrf_token %}
+                 
+                  <div>
+                    <div class="input-group mb-2 pb-2">
+                        <select class="custom-select" name="subject" id="inputGroupSelect02">
+                        {{ subjects }}
+                        {% for i in subjects %}
+                             <option value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                        </select>
+                        <div class="input-group-append">
+                        <label class="input-group-text" for="inputGroupSelect02">Subjects</label>
+                    </div>
+                    <br>
+                  </div>
+                
+                  <div>
+                        <div class="input-group ">
+                            <select class="custom-select" name="class_in" id="inputGroupSelect02">
+                            
+                                {% for i in classes %}
+                            <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                            </select>
+                            <div class="input-group-append">
+                            <label class="input-group-text" for="inputGroupSelect02">Class</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="availabe">
+                        <label for="">Only Avilable</label>
+                    </div>
+                    <div class="form-group">
+                        <label for=""> Salary From</label>
+                        <input type="number" class="form-control" name="salary_from">
+                    </div>
+                    <div class="form-group">
+                        <label for=""> Salary To</label>
+                        <input type="number" class="form-control" name="salary_to">
+                    </div>
+                    <br> 
+                    <button type="submit" class="btn btn-success float-right">Filter Post</button>
+                
+            
+            </form>
+  
+        </div>
+    </div>
+    <br>
+    <br>
   <div class="card">
     <div class="card-header">{{ msg }}</div>
     <div class="card-body">
-      <div class="row">
-        {% for p in posts %}
-        <div class="col-md-4 py-2">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="text-center">{{p.title}}</h2>
+        <div class="col-md-12">
+          <div class="row">
+            {% for p in posts %}
+            <div class="col-md-12 py-2">
+              <div class="card">
+                <div class="card-header">
+                  <h2 class="text-center">{{p.title}}</h2>
+                </div>
+                <div class="card-body">
+                  by -{{ p.user.username }}--<a
+                    href="/tuition/postdetail/{{p.id}}"
+                    >Details</a
+                  >
+                  <br />
+                </div>
+              </div>
             </div>
-            <div class="card-body">
-              by -{{ p.user.username }}--<a href="/tuition/postdetail/{{p.id}}"
-                >Details</a
-              >
-              <br />
-            </div>
+            {% endfor %}
           </div>
         </div>
-        {% endfor %}
       </div>
     </div>
   </div>

@@ -1,4 +1,5 @@
-from multiprocessing import context
+# from multiprocessing import context
+# from unittest import result
 
 from django.contrib import messages
 from django.db.models import Q
@@ -11,7 +12,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, FormView,
 from pyexpat import model
 
 from .forms import ContactForm, PostForm
-from .models import Contact, Post, Subject
+from .models import Class_in, Contact, Post, Subject
 
 
 class ContactView(FormView):
@@ -82,17 +83,19 @@ class PostListView(ListView):
         context = super().get_context_data(*args, **kwargs)
         context['posts'] = context.get('object_list')
         context['msg'] = "This is post list"
+        context['subjects'] = Subject.objects.all()
+        context['classes'] = Class_in.objects.all()
         return context
 
     # model = Post
 
-    context_object_name = "posts"
+    # context_object_name = "posts"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = context.get('object_list')
-        context['msg'] = "This is post list"
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["posts"] = context.get('object_list')
+    #     context['msg'] = "This is post list"
+    #     return context
 
 
 class PostDetailView(DetailView):
@@ -166,7 +169,33 @@ def search(request):
         results = Post.objects.filter(queryset).distinct()
     else:
         results = []
-    context ={
+    context = {
         'results': results,
     }
     return render(request, 'tuition/search.html', context)
+
+
+def filter(request):
+    if request.method == "POST":
+        subject = request.POST.get('subject', '')
+        class_in = request.POST.get('class_in', '')
+        availabe = request.POST.get('availabe', '')
+        salary_from = request.POST.get('salary_from', '')
+        salary_to = request.POST.get('salary_to', '')
+        if subject or class_in:
+            queryset = (Q(subject__name__icontains=subject)) & (
+                Q(class_in__name__icontains=class_in))
+            results = Post.objects.filter(queryset).distinct()
+            if availabe:
+                results = results.filter(availabe=True)
+            if salary_from:
+                results = results.filter(salary__gte=salary_from)
+            if salary_to:
+                results = results.filter(salary__lte=salary_to)
+
+        else:
+            results = []
+        context = {
+            'results': results
+        }
+        return render(request, 'tuition/search.html', context)
