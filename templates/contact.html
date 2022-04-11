@@ -9,7 +9,12 @@
         </div>
         <div class="card-body">
           <form method="POST">
-            {% csrf_token %} {{ form | crispy }}
+            {% csrf_token %} {{ form |crispy}} {% comment %} {% for field in form %} {{
+            field.errors }} {{ field|as_crispy_field }} {{ field.help_text }} {%
+            endfor %} {% endcomment %} {% comment %} {{ form.name.errors }} {{
+            form.name|as_crispy_field}} {{ form.phone.errors }} {{
+            form.phone|as_crispy_field}} {{ form.content.errors }} {{
+            form.content|as_crispy_field}} {% endcomment %}
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>

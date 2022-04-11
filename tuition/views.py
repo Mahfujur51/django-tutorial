@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -17,13 +18,14 @@ class ContactView(FormView):
 
     def form_valid(self, form):
         form.save()
+        messages.success(self.request, 'Thanks for contacting us')
         return super().form_valid(form)
 
     def form_invalid(self, form):
         return super().form_invalid(form)
 
     def get_success_url(self):
-        return reverse_lazy('contact')
+        return reverse_lazy('tuition:contact')
 # class ContactView(View):
 #     form_class = ContactForm
 #     template_name = 'contact.html'
@@ -42,20 +44,25 @@ class ContactView(FormView):
 
 
 # Create your views here.
-# def contact(request):
-#     if request.method == "POST":
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             # name = form.cleaned_data['name']
-#             # phone = form.cleaned_data['phone']
-#             # content = form.cleaned_data['content']
-#             # obj = Contact(name=name, phone=phone, content=content)
-#             # obj.save()
-#         # return HttpResponse("<h1>Thanks for contacting us</h1>")
-#     else:
-#         form = ContactForm()
-#     return render(request, 'contact.html', {'form': form})
+def contact(request):
+    initials = {
+        'name': 'My Name is ',
+        'phone': '+8801',
+        'content': 'My problem is ',
+    }
+    if request.method == "POST":
+        form = ContactForm(request.POST, initial=initials)
+        if form.is_valid():
+            form.save()
+            # name = form.cleaned_data['name']
+            # phone = form.cleaned_data['phone']
+            # content = form.cleaned_data['content']
+            # obj = Contact(name=name, phone=phone, content=content)
+            # obj.save()
+        # return HttpResponse("<h1>Thanks for contacting us</h1>")
+    else:
+        form = ContactForm(initial=initials)
+    return render(request, 'contact.html', {'form': form})
 
 
 def postview(request):
@@ -143,6 +150,6 @@ class PostUpdateView(UpdateView):
 #     return render(request, 'tuition/postcrate.html', {'form': form})
 
 class PostDeleteView(DeleteView):
-    model=Post
+    model = Post
     template_name = 'tuition/postdelete.html'
     success_url = reverse_lazy('tuition:postlist')

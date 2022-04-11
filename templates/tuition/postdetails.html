@@ -1,4 +1,5 @@
 {% extends 'index.html' %} {% block body %}
+{% load humanize %}
 <div class="container py-2">
   <div class="row">
     <div class="col-md-8 offset-md-2">
@@ -11,6 +12,8 @@
             <div class="card">
               <div class="card-header">
                 <h2 class="text-cetner">Title:{{object.title}}</h2>
+                by:{{ object.user.username }} at {{ object.created_at |naturaltime }}
+                <br>
                
                 {% if request.user == object.user %}
                    <a href="/tuition/edit/{{object.id}}" class="btn btn-success mr-2">Edit Post  </a>
