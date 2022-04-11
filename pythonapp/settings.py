@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'multiselectfield',
     'django.contrib.humanize',
+    'session',
 
 ]
 
