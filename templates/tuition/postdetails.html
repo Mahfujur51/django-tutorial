@@ -1,0 +1,54 @@
+{% extends 'index.html' %} {% block body %}
+<div class="container py-2">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="{{ object.image.url }}" class="img-fluid" alt="" />
+          </div>
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="text-cetner">Title:{{object.title}}</h2>
+               
+                {% if request.user == object.user %}
+                   <a href="/tuition/edit/{{object.id}}" class="btn btn-success mr-2">Edit Post  </a>
+                    <a href="/tuition/delete/{{object.id}}" class="btn btn-danger">Delete Post </a>
+                {% endif %}
+               
+              </div>
+              <div class="card-body">
+                Subject:
+                <ul>
+                  {% for s in object.subject.all %}
+                  <li>{{s.name}}</li>
+                  {% endfor %}
+                </ul>
+
+                Class:
+                <ul>
+                  {% for c in object.class_in.all %}
+                  <li>{{c.name}}</li>
+                  {% endfor %}
+                </ul>
+
+                <br />
+                <p class="divided">Category:={{ object.category }}</p>
+                <p>Salary:={{ object.salary }}</p>
+                <p>Medium:={{ object.medium }}</p>
+                <p>Category:={{ object.created_at }}</p>
+                <p>
+                  Avilable: {% if object.availabe %} Yes {% else %} No 
+                  {% endif %}
+                </p>
+                <p>Details:{{ object.details }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

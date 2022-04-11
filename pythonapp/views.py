@@ -21,6 +21,10 @@ def home(reqeuest):
 
 class HomeView(TemplateView):
     template_name = "home.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['msg']="Welcome Message!!"
+        return context
 
 # def contact(request):
 #     if request.method == "POST":
