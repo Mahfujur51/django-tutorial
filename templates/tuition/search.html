@@ -1,0 +1,17 @@
+{% extends 'index.html' %} {% block body %}
+<div class="container">
+  <div class="card">
+    <div class="card-header">Search Results</div>
+    <div class="card-body">
+        {% for p in results %}
+            {{ p.title }} <br>
+            by: {{ p.user }}
+            <hr>
+            Details:{{ p.details }} 
+            <a href="/tuition/postdetail/{{ p.id }}">...Read More</a> 
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

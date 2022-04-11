@@ -1,4 +1,7 @@
+from multiprocessing import context
+
 from django.contrib import messages
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -153,3 +156,17 @@ class PostDeleteView(DeleteView):
     model = Post
     template_name = 'tuition/postdelete.html'
     success_url = reverse_lazy('tuition:postlist')
+
+
+def search(request):
+    query = request.POST.get('search', '')
+    if query:
+        queryset = (Q(title__icontains=query)) | (Q(details__contains=query)) | (
+            Q(medium__icontains=query)) | (Q(salary__icontains=query)) | (Q(subject__name__icontains=query)) | (Q(class_in__name__icontains=query))
+        results = Post.objects.filter(queryset).distinct()
+    else:
+        results = []
+    context ={
+        'results': results,
+    }
+    return render(request, 'tuition/search.html', context)
