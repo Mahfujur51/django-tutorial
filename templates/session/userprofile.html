@@ -1,2 +1,62 @@
-
-{{user.username}}
+{% extends 'index.html' %} {% block body %}
+{% load humanize %}
+<div class="container py-2">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="{{ user.profile.image.url }}" class="img-fluid" alt="Image" />
+          </div>
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="text-center">Name:{{user.username}}</h2>
+                <br>
+            
+              </div>
+              <div class="card-body">
+                   <table class="table ">
+                       <tr>
+                           <td>Blood Group:</td>
+                           <td>{{user.profile.blood_group}}</td>
+                       </tr>
+                       <tr>
+                        <td>Address:</td>
+                        <td>{{user.profile.address}}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td>{{user.profile.phone}}</td>
+                    </tr>
+                    <tr>
+                        <td>Gender:</td>
+                        <td>{{user.profile.gender}}</td>
+                    </tr>
+                    <tr>
+                        <td>Bio Data:</td>
+                        <td>{{user.profile.biodata}}</td>
+                    </tr>
+                    <tr>
+                        <td>Profession:</td>
+                        <td>{{user.profile.profession}}</td>
+                    </tr>
+                    <tr>
+                        <td>Religion:</td>
+                        <td>{{user.profile.religion}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nationality:</td>
+                        <td>{{user.profile.nationality}}</td>
+                    </tr>
+                   </table>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}
