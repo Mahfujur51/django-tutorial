@@ -68,8 +68,10 @@
               <div class="card">
                 <div class="card-header">
                   <h2 class="text-center">{{p.title}}</h2>
+                 
                 </div>
                 <div class="card-body">
+                     {{p.details_short}}
                   by -{{ p.user.username }}--<a
                     href="/tuition/postdetail/{{p.id}}"
                     >Details</a

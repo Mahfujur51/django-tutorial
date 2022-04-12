@@ -11,7 +11,7 @@
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h2 class="text-cetner">Title:{{object.title}}</h2>
+                <h2 class="text-cetner">Title:{{object.ProperCase}}</h2>
                 by:{{ object.user.username }} at {{ object.created_at |naturaltime }}
                 <br>
                
@@ -22,12 +22,12 @@
                
               </div>
               <div class="card-body">
-                Subject:
-                <ul>
+                Subject:{{object.get_subject_list}}
+                {% comment %} <ul>
                   {% for s in object.subject.all %}
                   <li>{{s.name}}</li>
                   {% endfor %}
-                </ul>
+                </ul> {% endcomment %}
 
                 Class:
                 <ul>

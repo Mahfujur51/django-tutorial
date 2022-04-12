@@ -70,3 +70,19 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_subject_list(self):
+        sub = self.subject.all()
+        subjects=""
+        for s in sub:
+            subjects=subjects+str(s.name)+","
+        return subjects
+    def ProperCase(self):
+        return self.title.title()
+    def details_short(self):
+        details_word=self.details.split(' ')
+        if len(details_word)>10:
+            return ' '.join(details_word[0:10])+"...."
+        else:
+            self.details
+        
